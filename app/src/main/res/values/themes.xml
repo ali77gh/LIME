@@ -1,0 +1,16 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Theme.LIME" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/lime</item>
+        <item name="colorPrimaryVariant">@color/lime_dark</item>
+        <item name="colorOnPrimary">@color/black</item>
+
+        <!--for removing white screen before app starts-->
+        <item name="android:windowBackground">@color/white</item>
+
+        <item name="android:fontFamily">@font/vazir</item>
+
+        <!-- Customize your theme here. -->
+    </style>
+</resources>
