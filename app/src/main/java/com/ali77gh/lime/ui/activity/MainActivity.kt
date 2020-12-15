@@ -1,9 +1,11 @@
-package com.ali77gh.lime.ui
+package com.ali77gh.lime.ui.activity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.ali77gh.lime.R
-import com.ali77gh.lime.data.Event
+import com.ali77gh.lime.data.model.Event
+import com.ali77gh.lime.data.model.EventLog
+import com.ali77gh.lime.data.model.Routine
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -12,9 +14,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-//        Event.getRepo(this).Insert(Event("sleep",Event.EventType.TIME_BASE,8.0))
-//        Event.getRepo(this).Insert(Event("weight",Event.EventType.VALUE_BASE,60.0))
-//        Event.getRepo(this).Insert(Event("drink coffee",Event.EventType.COUNT_BASE))
         log(Event.getRepo(this).all)
     }
 
