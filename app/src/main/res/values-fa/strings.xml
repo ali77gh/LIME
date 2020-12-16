@@ -1,9 +1,10 @@
 <resources>
-    <string name="app_name">LIME</string>
 
+    <string name="app_name">LIME</string>
     <string name="settings">settings</string>
     <string name="event">event</string>
     <string name="my_day">my day</string>
     <string name="routine">routine</string>
     <string name="task">task</string>
+
 </resources>

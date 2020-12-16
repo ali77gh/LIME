@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="lime">#C8F205</color>
-    <color name="lime_dark">#87A303</color>
+    <color name="lime">#62B800</color>
+    <color name="lime_dark">#498800</color>
     <color name="black">#000000</color>
     <color name="white">#FFFFFF</color>
 </resources>

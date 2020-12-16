@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_setting"
+        android:icon="@drawable/ic_settings"
+        android:title="@string/settings" />
+
+    <item
+        android:id="@+id/navigation_event"
+        android:icon="@drawable/ic_chart"
+        android:title="@string/event" />
+
+    <item
+        android:id="@+id/navigation_my_day"
+        android:icon="@drawable/ic_calendar"
+        android:title="@string/my_day" />
+
+    <item
+        android:id="@+id/navigation_task"
+        android:icon="@drawable/ic_task"
+        android:title="@string/routine" />
+
+    <item
+        android:id="@+id/navigation_routine"
+        android:icon="@drawable/ic_routine"
+        android:title="@string/routine" />
+
+</menu>

@@ -3,7 +3,7 @@
     <style name="Theme.LIME" parent="Theme.MaterialComponents.Light.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/lime</item>
-        <item name="colorPrimaryVariant">@color/lime_dark</item>
+        <item name="colorPrimaryDark">@color/lime_dark</item>
         <item name="colorOnPrimary">@color/black</item>
 
         <!--for removing white screen before app starts-->
