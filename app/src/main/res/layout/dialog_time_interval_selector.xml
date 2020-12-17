@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Time interval selector"
+        android:layout_gravity="center"
+        android:textSize="20sp"
+        android:layout_marginTop="20dp"/>
+
+    <TextView
+        android:id="@+id/time_interval_selector_from"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="from day: not selected"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:padding="10dp"/>
+
+    <TextView
+        android:id="@+id/time_interval_selector_to"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="to day: not selected"
+        android:layout_gravity="center"
+        android:layout_marginBottom="20dp"
+        android:padding="10dp"/>
+
+    <Button
+        android:id="@+id/time_interval_selector_confirm"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="Confirm"
+        android:textColor="@color/white"/>
+</LinearLayout>

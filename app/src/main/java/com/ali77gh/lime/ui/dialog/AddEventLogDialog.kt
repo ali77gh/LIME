@@ -46,8 +46,9 @@ class AddEventLogDialog(private val event: Event) : BottomSheetDialogFragment() 
                 new_event_log_value.visibility = GONE
 
                 val lastEventLog = EventLog.getRepo(activity!!).getLastLogOfEvent(event.id)
-                val isStarted = if (lastEventLog==null) false//first log
-                else lastEventLog.value == 1.0
+                val isStarted =
+                    if (lastEventLog==null) false//first log
+                    else lastEventLog.isStart
 
                 new_event_log_add_btn.text=
                     if (isStarted) "stop"

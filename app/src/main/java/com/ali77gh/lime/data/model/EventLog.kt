@@ -20,9 +20,9 @@ open class EventLog(
     class EventLogRepo(context: Context?) :
         GenericDAO<EventLog?>(context, EventLog::class.java, "eventlog", true) {
 
-        //custom queries here
-        fun customQuerySample(): List<EventLog?> {
-            return getWithCondition { p0 -> (p0 as TimeBaseEventLog).isEnd; }
+
+        fun getEventLogs(eventId: String): List<EventLog?> {
+            return getWithCondition { p0 -> (p0 as EventLog).eventId==eventId; }
         }
 
         fun getLastLogOfEvent(eventId:String):EventLog?{
@@ -45,9 +45,7 @@ open class EventLog(
         Event.EventType.TIME_BASE,
         -1.0,
         time
-    ) {
-        //nothing to do :)
-    }
+    ) {}
 
     class TimeBaseEventLog(
         eventId: String,
@@ -58,11 +56,9 @@ open class EventLog(
         Event.EventType.TIME_BASE,
         if (isStart) 1.0 else 0.0,
         time
-    ) {
-
-        val isStart = value == 1.0;
-        val isEnd = value == 0.0;
-    }
+    ) {}
+    val isStart = value == 1.0;
+    val isEnd = value == 0.0;
 
     class ValueBaseEventLog(
         eventId: String,
@@ -73,10 +69,7 @@ open class EventLog(
         Event.EventType.TIME_BASE,
         value,
         time
-    ) {
-
-        val eventValue: Double get() = value;
-    }
+    ) {}
 
     // repo singleton
     companion object {
