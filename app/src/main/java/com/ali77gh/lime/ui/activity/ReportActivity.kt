@@ -7,6 +7,8 @@ import androidx.appcompat.app.AppCompatActivity
 import com.ali77gh.lime.R
 import com.ali77gh.lime.data.model.Event
 import com.ali77gh.lime.data.model.EventLog
+import com.ali77gh.lime.ui.dialog.AreYouSureDialog
+import com.ali77gh.lime.ui.dialog.EditEventDialog
 import com.ali77gh.lime.ui.dialog.TimeIntervalSelectorDialog
 import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
@@ -32,10 +34,7 @@ class ReportActivity : AppCompatActivity() {
 
         logs = EventLog.getRepo(this).getEventLogs(event!!.id)
 
-        report_title.text = "${event!!.name} (${Event.normalizeType(event!!.type)})"
-
-        if (event!!.note=="") report_note.visibility = GONE
-        report_note.text = event!!.note
+        loadEventInfo()
 
         when(event!!.type){
             Event.EventType.TIME_BASE -> {
@@ -56,13 +55,22 @@ class ReportActivity : AppCompatActivity() {
         }
 
         report_edit_event.setOnClickListener {
-            //TODO edit name FAB
+            EditEventDialog(event!!,refreshCb = {
+                loadEventInfo()
+            }).show(supportFragmentManager,"")
         }
         report_delete_event.setOnClickListener {
-            //TODO edit name FAB
+            AreYouSureDialog(cb={
+                Event.getRepo(this).Remove(event!!.id)
+                finish()
+            }).show(supportFragmentManager,"")
         }
+    }
 
+    private fun loadEventInfo(){
+        report_title.text = "${event!!.name} (${Event.normalizeType(event!!.type)})"
 
+        report_note.text = "${event!!.note} \n goal:${event!!.goal}"
     }
 
     private fun loadTimeBaseReport(){

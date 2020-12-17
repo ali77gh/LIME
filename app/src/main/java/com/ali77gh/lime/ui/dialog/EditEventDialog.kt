@@ -3,15 +3,16 @@ package com.ali77gh.lime.ui.dialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.GONE
 import android.view.ViewGroup
 import android.widget.Toast
-import android.widget.Toast.LENGTH_LONG
 import com.ali77gh.lime.R
 import com.ali77gh.lime.data.model.Event
+import com.ali77gh.lime.ui.activity.ReportActivity
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import kotlinx.android.synthetic.main.dialog_add_event.*
 
-class AddEventDialog(private val cb: ()->Unit) : BottomSheetDialogFragment() {
+class EditEventDialog(private var event:Event,private var refreshCb:()->Unit) : BottomSheetDialogFragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -24,36 +25,34 @@ class AddEventDialog(private val cb: ()->Unit) : BottomSheetDialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        //TODO tags :)
+        new_event_type_title.visibility = GONE
+        new_event_type.visibility = GONE
+        new_event_add_btn.text = "Edit"
+
+        new_event_name.setText(event.name)
+        new_event_goal.setText(event.goal.toString())
+        new_event_note.setText(event.note)
 
         new_event_add_btn.setOnClickListener {
 
-            val type = when(new_event_type.checkedRadioButtonId){
-                R.id.new_event_type_tb -> Event.EventType.TIME_BASE;
-                R.id.new_event_type_cb -> Event.EventType.COUNT_BASE;
-                R.id.new_event_type_vb -> Event.EventType.VALUE_BASE;
-                else -> {
-                    Toast.makeText(activity,"select type",LENGTH_LONG).show()
-                    return@setOnClickListener
-                }
-            }
-
             //validation
             if (new_event_name.text.toString() == ""){
-                Toast.makeText(activity,"enter name",LENGTH_LONG).show()
+                Toast.makeText(activity,"enter name", Toast.LENGTH_LONG).show()
                 return@setOnClickListener
             }
             if (new_event_goal.text.toString() == ""){
                 new_event_goal.setText("-1");
             }
 
-            Event.getRepo(activity!!).Insert(Event(
-                    new_event_name.text.toString()
-                    ,type
-                    ,new_event_note.text.toString()
-                    ,new_event_goal.text.toString().toDouble())
-                )
-            cb()
+            event.name = new_event_name.text.toString()
+            event.goal = new_event_goal.text.toString().toDouble()
+            event.note = new_event_note.text.toString()
+
+            Event.getRepo(activity!!).Update(event)
+
+            ReportActivity.event = event
+
+            refreshCb()
             dismiss()
         }
     }

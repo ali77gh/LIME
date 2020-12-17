@@ -30,6 +30,9 @@ class EventFragment :Fragment(), Backable{
     }
 
     private fun loadList() {
+
+        //TODO filter by tag
+
         event_recycler!!.setHasFixedSize(true)
         event_recycler!!.layoutManager = LinearLayoutManager(activity)
         event_recycler!!.adapter = EventListAdapter(Event.getRepo(activity!!).all as List<Event>,activity!!,fragmentManager!!)
@@ -43,5 +46,10 @@ class EventFragment :Fragment(), Backable{
 
     override fun onBack(): Boolean {
         return false;
+    }
+
+    override fun onResume() {
+        super.onResume()
+        loadList()// while coming back from report should handle delete and edit
     }
 }

@@ -31,10 +31,6 @@ class Event(
 
         //custom queries here
 
-        fun customQuerySample(): List<Event?> {
-            return getWithCondition { p0 -> (p0 as Event).name == "felan"; }
-        }
-
         fun getByTag(tag: String): List<Event?> {
             return getWithCondition { p0 -> (p0 as Event).tags.indexOf(tag) != -1; }
         }
