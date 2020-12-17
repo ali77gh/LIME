@@ -1,6 +1,9 @@
 package com.ali77gh.lime.data.model
 
 import android.content.Context
+import com.ali77gh.lime.data.model.Event.EventType.COUNT_BASE
+import com.ali77gh.lime.data.model.Event.EventType.TIME_BASE
+import com.ali77gh.lime.data.model.Event.EventType.VALUE_BASE
 import com.example.easyrepolib.sqlite.GenericDAO
 import com.example.easyrepolib.sqlite.Model
 
@@ -43,6 +46,15 @@ class Event(
         fun getRepo(context: Context): EventRepo {
             if (repo == null) repo = EventRepo(context)
             return repo!!
+        }
+
+        fun normalizeType(value:String):String{
+            return when(value){
+                COUNT_BASE->"count base"
+                TIME_BASE->"time base"
+                VALUE_BASE->"value base"
+                else->"un know"
+            }
         }
     }
 

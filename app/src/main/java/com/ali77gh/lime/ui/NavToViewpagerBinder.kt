@@ -12,7 +12,7 @@ class NavToViewpagerBinder {
         fun bind(navigation: BottomNavigationView, viewpager: ViewPager, adapter: ViewPagerAdapter) {
             val mOnNavigationItemSelectedListener: BottomNavigationView.OnNavigationItemSelectedListener =
                 BottomNavigationView.OnNavigationItemSelectedListener { item ->
-                    when (item.getItemId()) {
+                    when (item.itemId) {
                         R.id.navigation_setting -> {
                             viewpager.setCurrentItem(0, true)
                             MainActivity.currentFrag = adapter.getItem(0) as Backable

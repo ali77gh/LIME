@@ -2,12 +2,13 @@ package com.ali77gh.lime.data.model
 
 import android.content.Context
 import com.example.easyrepolib.sqlite.GenericDAO
+import com.example.easyrepolib.sqlite.KeyValDb
 import com.example.easyrepolib.sqlite.Model
 
 open class EventLog(
     var eventId: String,
     var eventType: String,
-    protected var value: Double,
+    var value: Double,
     var time: Long = System.currentTimeMillis()
 ) : Model {
 
@@ -22,6 +23,17 @@ open class EventLog(
         //custom queries here
         fun customQuerySample(): List<EventLog?> {
             return getWithCondition { p0 -> (p0 as TimeBaseEventLog).isEnd; }
+        }
+
+        fun getLastLogOfEvent(eventId:String):EventLog?{
+            var lastEventLog:EventLog?=null;
+            getWithCondition(KeyValDb.Condition {
+                val eventLog = it as EventLog
+                if (eventLog.eventId==eventId)
+                    lastEventLog = eventLog
+                return@Condition false
+            })
+            return lastEventLog;
         }
     }
 

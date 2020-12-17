@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="@string/new_event"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:textStyle="bold"
+        android:textSize="17sp"/>
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/new_event_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="event name"
+        android:lines="1"
+        android:singleLine="true"
+        android:layout_margin="10dp"
+        android:background="@drawable/shape_edit_text"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="type:"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"/>
+
+    <RadioGroup
+        android:id="@+id/new_event_type"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginStart="10dp"
+        android:layout_marginBottom="10dp">
+
+        <RadioButton
+            android:id="@+id/new_event_type_cb"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="count base"/>
+        <RadioButton
+            android:id="@+id/new_event_type_tb"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="time base"/>
+        <RadioButton
+            android:id="@+id/new_event_type_vb"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="value base"/>
+
+    </RadioGroup>
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/new_event_goal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="goal"
+        android:lines="1"
+        android:singleLine="true"
+        android:inputType="numberDecimal"
+        android:layout_margin="10dp"
+        android:background="@drawable/shape_edit_text"/>
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:visibility="gone">
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:background="@drawable/shape_edit_text"
+            android:layout_margin="10dp"
+            android:singleLine="true"
+            android:hint="tag name"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Add tag"
+            android:layout_marginEnd="10dp"
+            android:textColor="@color/white"/>
+
+    </LinearLayout>
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/new_event_note"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="70dp"
+        android:gravity="top"
+        android:hint="note"
+        android:layout_margin="10dp"
+        android:background="@drawable/shape_edit_text"/>
+
+    <Button
+        android:id="@+id/new_event_add_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="Add"
+        android:textColor="@color/white"
+        android:layout_marginBottom="20dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"/>
+</LinearLayout>
