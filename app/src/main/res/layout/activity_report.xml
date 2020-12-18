@@ -57,7 +57,44 @@
             android:background="@color/lime"
             android:layout_margin="20dp"/>
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="select time interval:"/>
 
+        <RadioGroup
+            android:id="@+id/report_value_base_radio_group"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center">
+
+            <RadioButton
+                android:id="@+id/report_value_base_radio_week"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="last week"/>
+
+            <RadioButton
+                android:id="@+id/report_value_base_radio_month"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="last month"/>
+
+            <RadioButton
+                android:id="@+id/report_value_base_radio_year"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="last year"/>
+
+            <RadioButton
+                android:id="@+id/report_value_base_radio_custom"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="custom"/>
+
+        </RadioGroup>
 
         <LinearLayout
             android:id="@+id/report_count_and_time_base_layout"
@@ -66,6 +103,10 @@
             android:orientation="vertical"
             android:visibility="gone">
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TODO"/>
         </LinearLayout>
 
         <LinearLayout
@@ -75,48 +116,18 @@
             android:orientation="vertical"
             android:visibility="gone">
 
-            <RadioGroup
-                android:id="@+id/report_value_base_radio_group"
+            <TextView
+                android:id="@+id/report_value_base_average_part"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center">
-
-                <RadioButton
-                    android:id="@+id/report_value_base_radio_week"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="last week"/>
-
-                <RadioButton
-                    android:id="@+id/report_value_base_radio_month"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="last month"/>
-
-                <RadioButton
-                    android:id="@+id/report_value_base_radio_year"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="last year"/>
-
-                <RadioButton
-                    android:id="@+id/report_value_base_radio_custom"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="custom"/>
-
-            </RadioGroup>
+                android:gravity="center"
+                android:layout_margin="10dp"/>
 
             <com.github.mikephil.charting.charts.LineChart
                 android:id="@+id/report_value_base_line_chart"
                 android:layout_width="match_parent"
-                android:layout_height="300dp" />
-
-            <TextView
-                android:id="@+id/report_value_base_average_part"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_height="300dp"
+                android:layout_margin="5dp"/>
 
         </LinearLayout>
 
