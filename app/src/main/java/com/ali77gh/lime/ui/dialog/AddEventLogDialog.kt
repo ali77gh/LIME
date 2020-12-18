@@ -13,7 +13,7 @@ import com.ali77gh.lime.data.model.EventLog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import kotlinx.android.synthetic.main.dialog_add_event_log.*
 
-class AddEventLogDialog(private val event: Event) : BottomSheetDialogFragment() {
+class AddEventLogDialog(private val event: Event,private val needUiUpdate:()->Unit) : BottomSheetDialogFragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -61,6 +61,7 @@ class AddEventLogDialog(private val event: Event) : BottomSheetDialogFragment() 
                             !isStarted
                         )
                     )
+                    needUiUpdate()
                     dismiss()
                 }
             }
