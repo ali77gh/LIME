@@ -19,7 +19,7 @@
     <item
         android:id="@+id/navigation_task"
         android:icon="@drawable/ic_task"
-        android:title="@string/routine" />
+        android:title="@string/task" />
 
     <item
         android:id="@+id/navigation_routine"
