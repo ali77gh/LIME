@@ -101,12 +101,75 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:visibility="gone">
+            android:visibility="visible">
 
             <TextView
+                android:id="@+id/report_count_and_time_base_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_margin="10dp"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/lime"
+                android:layout_margin="20dp"/>
+
+            <TextView
+                android:id="@+id/report_count_and_time_base_line_chart_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="TODO"/>
+                android:layout_gravity="center"
+                android:textSize="18sp"
+                android:text="time|count per day scattering"/>
+
+            <com.github.mikephil.charting.charts.LineChart
+                android:id="@+id/report_count_and_time_base_line_chart"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:layout_margin="5dp"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/lime"
+                android:layout_margin="20dp"/>
+
+            <TextView
+                android:id="@+id/report_count_and_time_base_bar_chart_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:textSize="18sp"
+                android:text="days of week scattering"/>
+
+            <com.github.mikephil.charting.charts.BarChart
+                android:id="@+id/report_count_and_time_base_bar_chart"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:layout_margin="5dp"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/lime"
+                android:layout_margin="20dp"/>
+
+            <TextView
+                android:id="@+id/report_count_and_time_base_bar_chart2_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:textSize="18sp"
+                android:text="hours of day scattering"/>
+
+            <com.github.mikephil.charting.charts.BarChart
+                android:id="@+id/report_count_and_time_base_bar_chart2"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:layout_margin="5dp"/>
+
         </LinearLayout>
 
         <LinearLayout
@@ -117,7 +180,7 @@
             android:visibility="gone">
 
             <TextView
-                android:id="@+id/report_value_base_average_part"
+                android:id="@+id/report_value_base_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
