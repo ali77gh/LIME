@@ -36,7 +36,7 @@ class TimeIntervalSelectorDialog(private var onSelect:(from:Long,to:Long)->Unit)
 
                 override fun onSelect(p0: Long, p1: DateSystem?) {
                     from = p0*1000
-                    time_interval_selector_from.text = "from day: ${p1!!.year}:${p1!!.month}:${p1!!.day}"
+                    time_interval_selector_from.text = "from day: ${p1!!.year}/${p1!!.month}/${p1!!.day}"
                 }
 
             })

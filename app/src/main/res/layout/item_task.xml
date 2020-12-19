@@ -16,13 +16,13 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/item_routine_name"
+                android:id="@+id/item_task_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="18sp"
                 android:layout_marginStart="10dp"
                 android:text="name"/>
-            
+
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -30,7 +30,7 @@
                 android:orientation="horizontal">
 
                 <Button
-                    android:id="@+id/item_routine_delete"
+                    android:id="@+id/item_task_delete"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -40,23 +40,14 @@
                     android:layout_margin="10dp"/>
 
                 <Button
-                    android:id="@+id/item_routine_edit"
+                    android:id="@+id/item_task_edit"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="edit"
                     android:textColor="@color/white"
                     android:layout_margin="10dp"/>
-                
-                <androidx.appcompat.widget.SwitchCompat
-                    android:id="@+id/item_routine_enable"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_gravity="center"
-                    android:layout_height="wrap_content"
-                    android:text="enable"
-                    android:layout_margin="10dp"/>
-                
+
             </LinearLayout>
 
         </LinearLayout>

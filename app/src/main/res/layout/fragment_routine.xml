@@ -18,5 +18,5 @@
         android:layout_margin="25dp"
         android:src="@drawable/ic_add"
         app:backgroundTint="@color/lime"
-        android:tint="@color/white"/>
+        app:tint="@color/white"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -15,7 +15,7 @@ class Task(
     var deadLine: Long,
     var mentalDifficulty: Int,
     var physicalDifficulty: Int,
-    var enteredTime: Int,
+    var enteredTime: Long,
 
     var duoDate :Long=0 // 0 means program should plan this task and other numbers are unix timestamp
     ): Model {

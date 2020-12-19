@@ -25,8 +25,9 @@ class Routine(
         GenericDAO<Routine?>(context, Routine::class.java, "routine", true) {
 
         //custom queries here
-        fun customQuerySample(): List<Routine?> {
-            return getWithCondition { p0 -> (p0 as EventLog.TimeBaseEventLog).isEnd; }
+
+        fun getEnableRoutines(): List<Routine?> {
+            return getWithCondition { p0 -> (p0 as Routine).enable; }
         }
     }
 
