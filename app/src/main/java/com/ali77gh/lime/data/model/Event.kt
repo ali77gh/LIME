@@ -34,6 +34,10 @@ class Event(
         fun getByTag(tag: String): List<Event?> {
             return getWithCondition { p0 -> (p0 as Event).tags.indexOf(tag) != -1; }
         }
+
+        fun getTimeBaseEvents(): List<Event?> {
+            return getWithCondition { p0 -> (p0 as Event).type==TIME_BASE; }
+        }
     }
 
     // repo singleton

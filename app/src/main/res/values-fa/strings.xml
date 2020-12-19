@@ -1,11 +1,19 @@
 <resources>
 
     <string name="app_name">LIME</string>
-    <string name="settings">settings</string>
-    <string name="event">event</string>
-    <string name="my_day">my day</string>
-    <string name="routine">routine</string>
-    <string name="task">task</string>
+    <string name="settings">تنظیمات</string>
+    <string name="event">رویداد</string>
+    <string name="my_day">روز من</string>
+    <string name="routine">روتین</string>
+    <string name="task">کار</string>
 
-    <string name="new_event">New Event</string>
+    <string name="new_event">رویداد جدید</string>
+
+    <string name="saturday">شنبه</string>
+    <string name="sunday">یکشنبه</string>
+    <string name="monday">دوشنبه</string>
+    <string name="tuesday">سه شنبه</string>
+    <string name="wednesday">چهارشنبه</string>
+    <string name="thursday">پنجشنبه</string>
+    <string name="friday">جمعه</string>
 </resources>

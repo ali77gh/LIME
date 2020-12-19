@@ -8,11 +8,11 @@ class Routine(
     var name: String,
     var note: String,
     var tags: List<String>,
-    var neededTimeInMinute: Int,
+    var neededTimeInMinute: Int,//in milisec
     var eventId :String?=null,
     var enable :Boolean,
 
-    var routineTime : Long,//milisec from start of day
+    var routineTime : Int,//milisec from start of day
     var routineDays: List<Int> // [0,1,2,3,4,5,6]
 
     ) :Model {

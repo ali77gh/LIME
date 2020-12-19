@@ -103,7 +103,7 @@
         android:layout_height="wrap_content"
         android:minHeight="70dp"
         android:gravity="top"
-        android:hint="note"
+        android:hint="note(optional)"
         android:layout_margin="10dp"
         android:background="@drawable/shape_edit_text"/>
 
