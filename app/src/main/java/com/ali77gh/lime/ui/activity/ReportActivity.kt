@@ -33,14 +33,14 @@ class ReportActivity : AppCompatActivity() {
         }
         fun getHourPartFrom4(milis: Long):Int{
             return when(JalaliDateTime((milis / 1000).toInt(), TimeZone.getDefault()).hour){
-                in 1..3 -> 0
-                in 3..6 -> 1
-                in 6..9 -> 2
-                in 9..12 -> 3
-                in 12..15 -> 4
-                in 15..18 -> 5
-                in 18..21 -> 6
-                in 21..24 -> 7
+                in 0..2 -> 0
+                in 3..5 -> 1
+                in 6..8 -> 2
+                in 9..11 -> 3
+                in 12..14 -> 4
+                in 15..17 -> 5
+                in 18..20 -> 6
+                in 21..23 -> 7
                 else -> throw RuntimeException("WTF?? getHourPartFrom4")
             }
         }
