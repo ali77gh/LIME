@@ -21,7 +21,7 @@ class Task(
     var enteredTime: Long,
 
     var duoDate :Long=0 // 0 means program should plan this task and other numbers are unix timestamp
-    ): Model,DayWork {
+    ): Model,DayWork,Comparable<Task> {
 
     private var id :String? = null;
     override fun setId(s: String) { id = s }
@@ -51,6 +51,17 @@ class Task(
                 (p0 as Task).duoDate == 0L
             }
         }
+
+        fun getFuturePlannedTasks():List<Task?>{
+            val now  = System.currentTimeMillis()
+            return getWithCondition { p0 ->
+                (p0 as Task).duoDate>now
+            }
+        }
+
+        fun updateAll(tasks:List<Task>){
+            for (i in tasks) Update(i)
+        }
     }
 
     companion object{
@@ -70,6 +81,15 @@ class Task(
         ): Task {
             return Task(name,note,tags,neededTimeInMinute,eventId,0,0,0,0,0,duoDate)
         }
+    }
+
+    /**
+     * a negative number if it's less than [other]
+     * its based on SJF algorithm in process management in OS
+     */
+    override fun compareTo(other: Task): Int {
+        return if (neededTimeInMinute > other.neededTimeInMinute)-1 else 1
+        //TODO use other things too
     }
 
     //DayWork overrides
@@ -93,4 +113,6 @@ class Task(
     override fun getNeededTime(): Int = neededTimeInMinute
 
     override fun getWorkName(): String = name
+
+
 }

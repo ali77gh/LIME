@@ -161,6 +161,7 @@ class AddTaskDialog(private val cb: ()->Unit) : BottomSheetDialogFragment() {
 
     private fun validation():Boolean{
 
+        //TODO check time conflect
         when {
             new_task_name.text.toString()=="" -> {
                 Toast.makeText(activity,"enter name", Toast.LENGTH_SHORT).show()

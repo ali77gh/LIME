@@ -31,6 +31,10 @@ class TaskListAdapter(
 
         holder.name.text = task.name
 
+        if (task.haveFixedTime){
+            holder.name.append(" (planned)")
+        }
+
         holder.delete.setOnClickListener{
             AreYouSureDialog {
                 Task.getRepo(activity).Remove(task.id)
