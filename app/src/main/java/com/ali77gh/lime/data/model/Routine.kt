@@ -1,8 +1,10 @@
 package com.ali77gh.lime.data.model
 
 import android.content.Context
+import com.ali.uneversaldatetools.date.JalaliDateTime
 import com.example.easyrepolib.sqlite.GenericDAO
 import com.example.easyrepolib.sqlite.Model
+import java.util.*
 
 class Routine(
     var name: String,
@@ -15,7 +17,7 @@ class Routine(
     var routineTime : Int,//milisec from start of day
     var routineDays: List<Int> // [0,1,2,3,4,5,6]
 
-    ) :Model {
+    ) :Model,DayWork {
 
     private var id: String? = null
     override fun setId(s: String) { id = s }
@@ -29,6 +31,14 @@ class Routine(
         fun getEnableRoutines(): List<Routine?> {
             return getWithCondition { p0 -> (p0 as Routine).enable; }
         }
+
+//        fun getADayRoutines(dayOfWeek: Int):List<Routine?>{
+//            return getWithCondition { p0 -> (p0 as Routine).routineDays.contains(dayOfWeek); }
+//        }
+
+        fun getADayEnableRoutines(dayOfWeek: Int):List<Routine?>{
+            return getWithCondition { p0 -> (p0 as Routine).routineDays.contains(dayOfWeek) && p0.enable }
+        }
     }
 
     companion object{
@@ -38,4 +48,23 @@ class Routine(
             return repo!!
         }
     }
+
+
+    override fun getStartTime(): Int = routineTime
+
+    override fun getStartTimeString(): String {
+        val date = JalaliDateTime((routineTime/1000).toInt(), TimeZone.getDefault())
+
+        return "${date.hour}:${date.min}"
+    }
+    override fun getEndTimeString(): String {
+        val date = JalaliDateTime(((routineTime+neededTimeInMinute)/1000).toInt(), TimeZone.getDefault())
+
+        return "${date.hour}:${date.min}"
+    }
+
+    override fun getNeededTime(): Int = neededTimeInMinute
+
+    override fun getWorkName(): String = name
+
 }
