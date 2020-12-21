@@ -121,13 +121,13 @@ class AddTaskDialog(private val cb: ()->Unit) : BottomSheetDialogFragment() {
         }
     }
 
-    private fun getNeededTime():Int{
-        return (new_task_need_time_min.text.toString().toInt() *60*1000) +
-                (new_task_need_time_hour.text.toString().toInt() *60*60*1000)
+    private fun getNeededTime():Long{
+        return (new_task_need_time_min.text.toString().toLong() *60*1000) +
+                (new_task_need_time_hour.text.toString().toLong() *60*60*1000)
     }
     private fun getDuoDate():Long{
-        return (new_task_start_time_min.text.toString().toInt() *60*1000) +
-                (new_task_start_time_hour.text.toString().toInt() *60*60*1000) +
+        return (new_task_start_time_min.text.toString().toLong() *60*1000) +
+                (new_task_start_time_hour.text.toString().toLong() *60*60*1000) +
                 selectedFixedDay!!
     }
     private fun getDeadLine():Long{

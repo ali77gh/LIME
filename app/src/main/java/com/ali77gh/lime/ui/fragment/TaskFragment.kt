@@ -52,6 +52,11 @@ class TaskFragment :Fragment(), Backable{
         startActivity(Intent(activity,PlannerActivity::class.java))
     }
 
+    override fun onResume() {
+        super.onResume()
+        loadList()
+    }
+
     override fun onBack(): Boolean {
         return false;
     }

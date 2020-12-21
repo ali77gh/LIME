@@ -11,7 +11,7 @@ class Task(
     var name: String,
     var note: String,
     var tags: List<String>,
-    var neededTimeInMinute: Int,
+    var neededTimeInMilis: Long,
     var eventId :String?=null,
 
     var priority: Int,
@@ -29,6 +29,7 @@ class Task(
 
     val haveFixedTime :Boolean
         get(){return duoDate!=0L}
+
 
     class TaskRepo(context: Context?) :
         GenericDAO<Task?>(context, Task::class.java, "task", true) {
@@ -75,11 +76,11 @@ class Task(
             name: String,
             note: String,
             tags: List<String>,
-            neededTimeInMinute: Int,
+            neededTimeInMilis: Long,
             duoDate: Long,
             eventId: String?=null
         ): Task {
-            return Task(name,note,tags,neededTimeInMinute,eventId,0,0,0,0,0,duoDate)
+            return Task(name,note,tags,neededTimeInMilis,eventId,0,0,0,0,0,duoDate)
         }
     }
 
@@ -88,7 +89,7 @@ class Task(
      * its based on SJF algorithm in process management in OS
      */
     override fun compareTo(other: Task): Int {
-        return if (neededTimeInMinute > other.neededTimeInMinute)-1 else 1
+        return if (neededTimeInMilis > other.neededTimeInMilis) -1 else 1
         //TODO use other things too
     }
 
@@ -105,12 +106,12 @@ class Task(
         return "${date.hour}:${date.min}"
     }
     override fun getEndTimeString(): String {
-        val date = JalaliDateTime(((duoDate+neededTimeInMinute)/1000).toInt(), TimeZone.getDefault())
+        val date = JalaliDateTime(((duoDate+neededTimeInMilis)/1000).toInt(), TimeZone.getDefault())
 
         return "${date.hour}:${date.min}"
     }
 
-    override fun getNeededTime(): Int = neededTimeInMinute
+    override fun getNeededTime(): Int = neededTimeInMilis.toInt()
 
     override fun getWorkName(): String = name
 

@@ -11,11 +11,10 @@ import com.ali77gh.lime.R
 import com.ali77gh.lime.data.PlannerEngine
 import com.ali77gh.lime.data.model.Task
 import java.util.*
-import kotlin.collections.ArrayList
 
 class PlannerListAdapter(tasks:List<Task>,var activity: Activity) : RecyclerView.Adapter<PlannerListAdapter.ViewHolder>() {
 
-    var plannedTasks:ArrayList<Task> = PlannerEngine.plan(activity,tasks) as ArrayList<Task>
+    var plannedTasks:List<Task> = PlannerEngine(activity,tasks).getPlannedTasks()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
@@ -27,7 +26,7 @@ class PlannerListAdapter(tasks:List<Task>,var activity: Activity) : RecyclerView
         val plannedTask = plannedTasks[position]
 
         val startDate = JalaliDateTime((plannedTask.duoDate/1000).toInt(), TimeZone.getDefault())
-        val endDate = JalaliDateTime(((plannedTask.duoDate+plannedTask.neededTimeInMinute)/1000).toInt(), TimeZone.getDefault())
+        val endDate = JalaliDateTime(((plannedTask.duoDate+plannedTask.neededTimeInMilis)/1000).toInt(), TimeZone.getDefault())
         val dayOfWeek = activity.resources.getStringArray(R.array.day_of_week)[startDate.dayOfWeek.value]
         holder.text.text =
             "${plannedTask.name} $dayOfWeek at ${startDate.hour}:${startDate.min}->${endDate.hour}:${endDate.min}"

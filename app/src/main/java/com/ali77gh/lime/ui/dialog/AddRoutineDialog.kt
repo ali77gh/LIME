@@ -57,9 +57,9 @@ class AddRoutineDialog(private val cb: ()->Unit) : BottomSheetDialogFragment() {
         }
     }
 
-    private fun getNeededTime():Int{
-        return (new_routine_need_time_min.text.toString().toInt() *60*1000) +
-                (new_routine_need_time_hour.text.toString().toInt() *60*60*1000)
+    private fun getNeededTime():Long{
+        return (new_routine_need_time_min.text.toString().toLong() *60*1000) +
+                (new_routine_need_time_hour.text.toString().toLong() *60*60*1000)
     }
 
     private fun getRoutineTime():Int{

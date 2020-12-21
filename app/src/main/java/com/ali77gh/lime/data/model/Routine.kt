@@ -10,7 +10,7 @@ class Routine(
     var name: String,
     var note: String,
     var tags: List<String>,
-    var neededTimeInMinute: Int,//in milisec
+    var neededTimeInMilis: Long,//in milisec
     var eventId :String?=null,
     var enable :Boolean,
 
@@ -53,18 +53,22 @@ class Routine(
     override fun getStartTime(): Int = routineTime
 
     override fun getStartTimeString(): String {
-        val date = JalaliDateTime((routineTime/1000).toInt(), TimeZone.getDefault())
+        val date = JalaliDateTime(((routineTime+getFirstOfDayMilis())/1000).toInt(), TimeZone.getDefault())
 
         return "${date.hour}:${date.min}"
     }
     override fun getEndTimeString(): String {
-        val date = JalaliDateTime(((routineTime+neededTimeInMinute)/1000).toInt(), TimeZone.getDefault())
+        val date = JalaliDateTime((((routineTime+getFirstOfDayMilis())+neededTimeInMilis)/1000).toInt(), TimeZone.getDefault())
 
         return "${date.hour}:${date.min}"
     }
 
-    override fun getNeededTime(): Int = neededTimeInMinute
+    override fun getNeededTime(): Int = neededTimeInMilis.toInt()
 
     override fun getWorkName(): String = name
 
+    private fun getFirstOfDayMilis():Long{
+        val now = JalaliDateTime.Now()
+        return JalaliDateTime(now.year,now.month,now.day).toUnixTime().toLong() * 1000L
+    }
 }
