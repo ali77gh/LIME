@@ -221,9 +221,8 @@ class AddTaskDialog(
 
         new_task_add_btn.text = "Edit"
 
-        //TODO use post if layout switching not worked
-
         task!!
+
         new_task_type_fixed_time.postDelayed({
             if (task.haveFixedTime) {
                 new_task_type_fixed_time.isChecked = true
@@ -236,7 +235,7 @@ class AddTaskDialog(
         },200)
 
 
-        //tests
+        //texts
         new_task_name.setText(task.name)
         new_task_note.setText(task.note)
 
@@ -268,7 +267,7 @@ class AddTaskDialog(
             selectedDeadLineDay=JalaliDateTime(date.year,date.month,date.day).toUnixTime().toLong() * 1000L
         }
         if (task.neededTimeInMilis!=0L){
-            val date = JalaliDateTime((task.deadLine/1000).toInt(), TimeZone.getDefault())
+            val date = JalaliDateTime((task.neededTimeInMilis/1000).toInt(), TimeZone.getDefault())
             new_task_need_time_hour.setText(date.hour.toString())
             new_task_need_time_min.setText(date.min.toString())
         }

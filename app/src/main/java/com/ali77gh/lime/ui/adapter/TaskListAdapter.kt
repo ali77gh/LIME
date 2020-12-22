@@ -43,7 +43,6 @@ class TaskListAdapter(
             }.show(fragmentManager,"")
         }
         holder.edit.setOnClickListener{
-            Toast.makeText(activity,"coming soon...", Toast.LENGTH_SHORT).show()
             AddTaskDialog({
                 for (i in listdata.indices){
                     if (listdata[i].id==it.id) {

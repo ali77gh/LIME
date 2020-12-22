@@ -5,12 +5,23 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import com.ali.uneversaldatetools.date.JalaliDateTime
 import com.ali77gh.lime.R
+import com.ali77gh.lime.data.model.Event
 import com.ali77gh.lime.data.model.Routine
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import kotlinx.android.synthetic.main.dialog_add_routine.*
+import kotlinx.android.synthetic.main.dialog_add_task.*
+import java.util.*
+import kotlin.collections.ArrayList
 
-class AddRoutineDialog(private val cb: ()->Unit) : BottomSheetDialogFragment() {
+class AddRoutineDialog(
+    private val cb: (routine:Routine)->Unit,
+    private val routine:Routine? = null
+    ) : BottomSheetDialogFragment() {
+
+
+    private val isEditMode = routine != null
 
     var eventId:String? = null;
 
@@ -35,25 +46,31 @@ class AddRoutineDialog(private val cb: ()->Unit) : BottomSheetDialogFragment() {
             }.show(fragmentManager!!,"")
         }
 
+        if (isEditMode) loadCurrent()
+
 
         new_routine_add_btn.setOnClickListener{
 
             if (!validation()) return@setOnClickListener
 
-            Routine.getRepo(activity!!).Insert(
-                Routine(
-                    new_routine_name.text.toString(),
-                    new_routine_note.text.toString(),
-                    ArrayList(),//TODO get tags
-                    getNeededTime(),
-                    eventId,
-                    true,
-                    getRoutineTime(),
-                    getRoutineDays()
-                )
+            val newRoutine =Routine(
+                new_routine_name.text.toString(),
+                new_routine_note.text.toString(),
+                ArrayList(),//TODO get tags
+                getNeededTime(),
+                eventId,
+                true,
+                getRoutineTime(),
+                getRoutineDays()
             )
+            if (isEditMode) {
+                newRoutine.id = routine!!.id
+                Routine.getRepo(activity!!).Update(newRoutine)
+            } else {
+                Routine.getRepo(activity!!).Insert(newRoutine)
+            }
+            cb(newRoutine)
             dismiss()
-            cb()
         }
     }
 
@@ -82,7 +99,7 @@ class AddRoutineDialog(private val cb: ()->Unit) : BottomSheetDialogFragment() {
 
     private fun validation():Boolean{
 
-        //TODO check time conflect
+        //TODO check time conflict
         when {
             new_routine_name.text.toString()=="" -> {
                 Toast.makeText(activity,"enter name",Toast.LENGTH_SHORT).show()
@@ -111,5 +128,45 @@ class AddRoutineDialog(private val cb: ()->Unit) : BottomSheetDialogFragment() {
 
         }
         return true
+    }
+
+    private fun loadCurrent() {
+
+        new_routine_add_btn.text = "Edit"
+
+        routine!!
+
+        //texts
+        new_routine_name.setText(routine.name)
+        new_routine_note.setText(routine.note)
+
+        //event
+        eventId = routine.eventId
+        if (eventId!=null){
+            val eventName = Event.getRepo(activity!!).getById(eventId)
+            new_routine_event_relation.text = "Relation with event(optional): $eventName"
+        }
+
+        //dates
+        if (routine.routineTime!=0){
+            val date = JalaliDateTime((routine.routineTime/1000), TimeZone.getDefault())
+            new_routine_start_time_hour.setText(date.hour.toString())
+            new_routine_start_time_min.setText(date.min.toString())
+        }
+        if (routine.neededTimeInMilis!=0L){
+            val date = JalaliDateTime((routine.neededTimeInMilis/1000).toInt(), TimeZone.getDefault())
+            new_routine_need_time_hour.setText(date.hour.toString())
+            new_routine_need_time_min.setText(date.min.toString())
+        }
+
+        //day of weeks
+        if (routine.routineDays.contains(0)) new_routine_week_0.isChecked = true
+        if (routine.routineDays.contains(1)) new_routine_week_1.isChecked = true
+        if (routine.routineDays.contains(2)) new_routine_week_2.isChecked = true
+        if (routine.routineDays.contains(3)) new_routine_week_3.isChecked = true
+        if (routine.routineDays.contains(4)) new_routine_week_4.isChecked = true
+        if (routine.routineDays.contains(5)) new_routine_week_5.isChecked = true
+        if (routine.routineDays.contains(6)) new_routine_week_6.isChecked = true
+
     }
 }

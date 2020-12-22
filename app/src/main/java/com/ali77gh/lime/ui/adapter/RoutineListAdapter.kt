@@ -12,6 +12,9 @@ import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
 import com.ali77gh.lime.R
 import com.ali77gh.lime.data.model.Routine
+import com.ali77gh.lime.data.model.Task
+import com.ali77gh.lime.ui.dialog.AddRoutineDialog
+import com.ali77gh.lime.ui.dialog.AddTaskDialog
 import com.ali77gh.lime.ui.dialog.AreYouSureDialog
 
 class RoutineListAdapter(
@@ -40,10 +43,19 @@ class RoutineListAdapter(
                 deleteFromDataSet(routine)
             }.show(fragmentManager,"")
         }
+
         holder.edit.setOnClickListener{
-            Toast.makeText(activity,"coming soon...",Toast.LENGTH_SHORT).show()
-            //TODO
+            AddRoutineDialog({
+                for (i in listdata.indices){
+                    if (listdata[i].id==it.id) {
+                        (listdata as ArrayList<Routine>)[i] = it
+                        break
+                    }
+                }
+                notifyDataSetChanged()
+            },routine).show(fragmentManager,"")
         }
+
         holder.enable.setOnCheckedChangeListener { _, b ->
             routine.enable = b
             Routine.getRepo(activity).Update(routine)
