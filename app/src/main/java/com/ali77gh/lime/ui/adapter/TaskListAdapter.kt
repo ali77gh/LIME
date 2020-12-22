@@ -11,6 +11,7 @@ import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
 import com.ali77gh.lime.R
 import com.ali77gh.lime.data.model.Task
+import com.ali77gh.lime.ui.dialog.AddTaskDialog
 import com.ali77gh.lime.ui.dialog.AreYouSureDialog
 
 class TaskListAdapter(
@@ -43,7 +44,15 @@ class TaskListAdapter(
         }
         holder.edit.setOnClickListener{
             Toast.makeText(activity,"coming soon...", Toast.LENGTH_SHORT).show()
-            //TODO
+            AddTaskDialog({
+                for (i in listdata.indices){
+                    if (listdata[i].id==it.id) {
+                        (listdata as ArrayList<Task>)[i] = it
+                        break
+                    }
+                }
+                notifyDataSetChanged()
+            },task).show(fragmentManager,"")
         }
     }
 

@@ -87,6 +87,7 @@ class ReportActivity : AppCompatActivity() {
         report_delete_event.setOnClickListener {
             AreYouSureDialog(cb = {
                 Event.getRepo(this).Remove(event!!.id)
+                //TODO cascade delete logs
                 finish()
             }).show(supportFragmentManager, "")
         }

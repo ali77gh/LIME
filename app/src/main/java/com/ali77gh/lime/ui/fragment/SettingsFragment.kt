@@ -1,5 +1,7 @@
 package com.ali77gh.lime.ui.fragment
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -26,17 +28,25 @@ class SettingsFragment :Fragment(), Backable{
 
         setting_version.text = "version: " + BuildConfig.VERSION_NAME
 
-        setting_language.setOnClickListener{
-            Toast.makeText(activity,"coming soon...",Toast.LENGTH_SHORT).show()
-            //TODO
-        }
-        setting_date_system.setOnClickListener{
-            Toast.makeText(activity,"coming soon...",Toast.LENGTH_SHORT).show()
-            //TODO
-        }
+//        setting_language.setOnClickListener{
+//            Toast.makeText(activity,"coming soon...",Toast.LENGTH_SHORT).show()
+//            //TODO
+//        }
+//        setting_date_system.setOnClickListener{
+//            Toast.makeText(activity,"coming soon...",Toast.LENGTH_SHORT).show()
+//            //TODO
+//        }
         setting_about_developer.setOnClickListener{
-            Toast.makeText(activity,"ali ghahremani but coming soon...",Toast.LENGTH_SHORT).show()
-            //TODO
+            startActivity(
+                Intent(
+                    Intent.ACTION_VIEW,
+                    Uri.parse("https://ali77gh.ir")
+                )
+            )
+        }
+
+        setting_website.setOnClickListener {
+            Toast.makeText(activity,"coming soon...",Toast.LENGTH_SHORT).show()
         }
     }
 

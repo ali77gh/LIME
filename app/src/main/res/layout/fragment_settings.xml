@@ -24,29 +24,29 @@
         android:layout_height="1dp"
         android:background="@color/gray"/>
 
-    <TextView
-        android:id="@+id/setting_language"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="language"
-        android:textSize="18dp"
-        android:padding="20dp"/>
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/gray"/>
+<!--    <TextView-->
+<!--        android:id="@+id/setting_language"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="language"-->
+<!--        android:textSize="18dp"-->
+<!--        android:padding="20dp"/>-->
+<!--    <View-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="1dp"-->
+<!--        android:background="@color/gray"/>-->
 
-    <TextView
-        android:id="@+id/setting_date_system"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="date system"
-        android:textSize="18dp"
-        android:padding="20dp"/>
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/gray"/>
+<!--    <TextView-->
+<!--        android:id="@+id/setting_date_system"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="date system"-->
+<!--        android:textSize="18dp"-->
+<!--        android:padding="20dp"/>-->
+<!--    <View-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="1dp"-->
+<!--        android:background="@color/gray"/>-->
 
     <TextView
         android:id="@+id/setting_about_developer"
@@ -61,10 +61,10 @@
         android:background="@color/gray"/>
 
     <TextView
-        android:id="@+id/setting_guide"
+        android:id="@+id/setting_website"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="guide"
+        android:text="website"
         android:textSize="18dp"
         android:padding="20dp"/>
     <View

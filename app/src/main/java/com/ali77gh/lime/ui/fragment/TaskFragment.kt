@@ -43,9 +43,9 @@ class TaskFragment :Fragment(), Backable{
     }
 
     private fun fabClick(){
-        AddTaskDialog {
+        AddTaskDialog ({
             loadList()
-        }.show(fragmentManager!!,"")
+        }).show(fragmentManager!!,"")
     }
 
     private fun plannerFabClick(){
