@@ -6,13 +6,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
-import android.widget.Toast
 import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
 import com.ali77gh.lime.R
 import com.ali77gh.lime.data.model.Task
 import com.ali77gh.lime.ui.dialog.AddTaskDialog
 import com.ali77gh.lime.ui.dialog.AreYouSureDialog
+import com.ali77gh.lime.ui.fragment.MyDayFragment
 
 class TaskListAdapter(
     private var listdata: List<Task>,
@@ -40,6 +40,7 @@ class TaskListAdapter(
             AreYouSureDialog {
                 Task.getRepo(activity).Remove(task.id)
                 deleteFromDataSet(task)
+                MyDayFragment.refresh()
             }.show(fragmentManager,"")
         }
         holder.edit.setOnClickListener{
@@ -51,6 +52,7 @@ class TaskListAdapter(
                     }
                 }
                 notifyDataSetChanged()
+                MyDayFragment.refresh()
             },task).show(fragmentManager,"")
         }
     }

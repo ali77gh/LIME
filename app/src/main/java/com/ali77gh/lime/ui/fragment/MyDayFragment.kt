@@ -43,12 +43,21 @@ class MyDayFragment :Fragment(), Backable{
         }
 
         loadList()
+
+        loadLisFunction = { loadList() }
     }
 
     private fun loadList(){
         val date = JalaliDateTime.Now()
         loadList(JalaliDateTime(date.year,date.month,date.day).toUnixTime().toLong() *1000L)
         my_day_date.text = "${date!!.year}/${date!!.month}/${date!!.day}"
+    }
+
+    companion object {
+        private var loadLisFunction: (() -> Unit)? = null
+        fun refresh(){
+            loadLisFunction?.invoke()
+        }
     }
 
 
