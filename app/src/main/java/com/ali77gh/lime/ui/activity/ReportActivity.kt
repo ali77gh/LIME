@@ -3,6 +3,7 @@ package com.ali77gh.lime.ui.activity
 import android.os.Bundle
 import android.view.View.GONE
 import android.view.View.VISIBLE
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.ali.uneversaldatetools.date.JalaliDateTime
 import com.ali77gh.lime.R
@@ -41,7 +42,7 @@ class ReportActivity : AppCompatActivity() {
                 in 15..17 -> 5
                 in 18..20 -> 6
                 in 21..23 -> 7
-                else -> throw RuntimeException("WTF?? getHourPartFrom4")
+                else -> throw RuntimeException("invalid hour in getHourPartFrom4()")
             }
         }
     }
@@ -108,6 +109,10 @@ class ReportActivity : AppCompatActivity() {
                 report_count_and_time_base_layout.visibility = VISIBLE
                 report_value_base_layout.visibility = GONE
 
+                if (records.isEmpty() || records.size==1){
+                    Toast.makeText(this,"not enough data for report",Toast.LENGTH_SHORT).show()
+                    return
+                }
                 if (records.first()!!.isEnd)
                     records = records.drop(0) // remove first item if its end
                 if (records.last()!!.isStart)
@@ -145,7 +150,7 @@ class ReportActivity : AppCompatActivity() {
             val diffInDays = (diff/ DAY_IN_MILIS)
 
             val averageTimeInDays=(getSum()/diffInDays)
-            report_count_and_time_base_text.text = "this event happend ${records!!.size} minutes in seleced interval \n"
+            report_count_and_time_base_text.text = "this event happened ${records!!.size} minutes in selected interval \n"
             report_count_and_time_base_text.append("average ${normalizeNumber(averageTimeInDays)} minutes in day\n")
             report_count_and_time_base_text.append("average ${normalizeNumber(averageTimeInDays * 7)} minutes in week\n")
             report_count_and_time_base_text.append("average ${normalizeNumber(averageTimeInDays * 30)} minutes in month")
@@ -158,15 +163,61 @@ class ReportActivity : AppCompatActivity() {
         }
 
         fun loadChart2(){
-            //TODO show chart
-            report_count_and_time_base_bar_chart.visibility = GONE
-            report_count_and_time_base_bar_chart_title.visibility = GONE
+
+            fun getSumOfDay(dayOfWeek: Int):Float{
+
+                var sum = 0F
+                for (i in records!!.indices){
+                    if (i%2==1){
+                        if (getDayOfWeek(records[i]!!.time) == dayOfWeek)
+                            sum += records[i]!!.time - records[i-1]!!.time
+                    }
+                }
+                return (sum/1000)/60 // milis to minutes
+            }
+
+            val entries: ArrayList<BarEntry> = ArrayList()
+
+            for (i in 0..6)
+                entries.add(BarEntry((i).toFloat(), getSumOfDay(i)))
+
+            report_count_and_time_base_bar_chart.data = BarData(BarDataSet(entries, "day of weeks / minutes")) //TODO translator
+
+            val labels = arrayOf("sat", "sun", "mon", "tue", "wed", "thu", "fri") //TODO get from traslator class for farsi
+            report_count_and_time_base_bar_chart.xAxis.valueFormatter = IndexAxisValueFormatter(labels)
+            report_count_and_time_base_bar_chart.xAxis.granularity = 1f
+            report_count_and_time_base_bar_chart.xAxis.isGranularityEnabled = true
+
+            report_count_and_time_base_bar_chart.invalidate() // refresh
         }
 
         fun loadChart3(){
-            //TODO show chart
-            report_count_and_time_base_bar_chart2.visibility = GONE
-            report_count_and_time_base_bar_chart2_title.visibility = GONE
+
+            fun getSumOfHour(hourPart: Int):Float{
+
+                var sum = 0F
+                for (i in records!!.indices){
+                    if (i%2==1){
+                        if (getHourPartFrom4(records[i]!!.time) == hourPart)
+                            sum += records[i]!!.time - records[i-1]!!.time
+                    }
+                }
+                return (sum/1000)/60 // milis to minutes
+            }
+
+            val entries: ArrayList<BarEntry> = ArrayList()
+
+            for (i in 0..7)
+                entries.add(BarEntry((i).toFloat(),getSumOfHour(i)))
+
+            report_count_and_time_base_bar_chart2.data = BarData(BarDataSet(entries, "hours of day / minutes")) //TODO translator
+
+            val labels = arrayOf("0-3","3-6", "6-9","9-12","12-15","15-18", "18-21","21-24") //TODO get from traslator class for farsi
+            report_count_and_time_base_bar_chart2.xAxis.valueFormatter = IndexAxisValueFormatter(labels)
+            report_count_and_time_base_bar_chart2.xAxis.granularity = 1f
+            report_count_and_time_base_bar_chart2.xAxis.isGranularityEnabled = true
+
+            report_count_and_time_base_bar_chart2.invalidate() // refresh
         }
 
         loadDayAverage()
@@ -183,7 +234,7 @@ class ReportActivity : AppCompatActivity() {
             val diffInDays = (diff/ DAY_IN_MILIS)
 
             val averageTimeInDays=(records!!.size/diffInDays)
-            report_count_and_time_base_text.text = "this event happend ${records!!.size} \n"
+            report_count_and_time_base_text.text = "this event happened ${records!!.size} \n"
             report_count_and_time_base_text.append("average ${normalizeNumber(averageTimeInDays)} times in day\n")
             report_count_and_time_base_text.append("average ${normalizeNumber(averageTimeInDays * 7)} times in week\n")
             report_count_and_time_base_text.append("average ${normalizeNumber(averageTimeInDays * 30)} times in month")

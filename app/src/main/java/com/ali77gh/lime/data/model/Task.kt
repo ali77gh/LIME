@@ -21,7 +21,7 @@ class Task(
     var enteredTime: Long,
 
     var duoDate :Long=0 // 0 means program should plan this task and other numbers are unix timestamp
-    ): Model,DayWork,Comparable<Task> {
+    ): Model,DayWork {
 
     private var id :String? = null;
     override fun setId(s: String) { id = s }
@@ -84,14 +84,7 @@ class Task(
         }
     }
 
-    /**
-     * a negative number if it's less than [other]
-     * its based on SJF algorithm in process management in OS
-     */
-    override fun compareTo(other: Task): Int {
-        return if (neededTimeInMilis > other.neededTimeInMilis) -1 else 1
-        //TODO use other things too
-    }
+
 
     //DayWork overrides
 
