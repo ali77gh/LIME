@@ -62,11 +62,11 @@ class ReportActivity : AppCompatActivity() {
 
             when (p1) {
                 R.id.report_value_base_radio_week ->
-                    render(now - WEEK_IN_MILIS, System.currentTimeMillis())
+                    render(now - WEEK_IN_MILIS, now)
                 R.id.report_value_base_radio_month ->
-                    render(now - MONTH_IN_MILIS, System.currentTimeMillis())
+                    render(now - MONTH_IN_MILIS, now)
                 R.id.report_value_base_radio_year ->
-                    render(now - YEAR_IN_MILIS, System.currentTimeMillis())
+                    render(now - YEAR_IN_MILIS, now)
                 R.id.report_value_base_radio_custom -> {
                     TimeIntervalSelectorDialog(onSelect = { from: Long, to: Long ->
                         render(from, to)
@@ -157,9 +157,38 @@ class ReportActivity : AppCompatActivity() {
         }
 
         fun loadChart1(){
-            //TODO show chart
-            report_count_and_time_base_line_chart.visibility = GONE
-            report_count_and_time_base_line_chart_title.visibility = GONE
+
+            fun calculateSumOfDay(start: Long):Float{
+                val end = start + DAY_IN_MILIS
+                var sum = 0F
+                var dayRecords = records!!.filter { end > it!!.time&&it!!.time > start }
+
+                if (dayRecords.isEmpty() || dayRecords.size==1) return 0F
+
+                if (dayRecords[0]!!.isEnd){
+                    sum += dayRecords[0]!!.time
+                    dayRecords = dayRecords.drop(0)
+                }
+                if (dayRecords.last()!!.isStart){
+                    sum += end - dayRecords[0]!!.time
+                    dayRecords = dayRecords.drop(dayRecords.lastIndex)
+                }
+                for (i in dayRecords!!.indices){
+                    if (i%2==1){
+                        sum += records[i]!!.time - records[i-1]!!.time
+                    }
+                }
+
+                return (sum/1000)/60 //milis to minutes
+            }
+
+            val entries: ArrayList<Entry> = ArrayList()
+            for(i in start..end step DAY_IN_MILIS)
+                entries.add(Entry(i.toFloat(), calculateSumOfDay(i)))
+
+
+            report_count_and_time_base_line_chart.data = LineData(LineDataSet(entries, ""))
+            report_count_and_time_base_line_chart.invalidate() // refresh
         }
 
         fun loadChart2(){
@@ -242,9 +271,19 @@ class ReportActivity : AppCompatActivity() {
 
 
         fun loadChart1(){
-            //TODO show chart
-            report_count_and_time_base_line_chart.visibility = GONE
-            report_count_and_time_base_line_chart_title.visibility = GONE
+
+            fun calculateSumOfDay(start: Long):Float{
+                val end = start + DAY_IN_MILIS
+                return records!!.filter { end > it!!.time&&it!!.time > start }.size.toFloat()// TODO optimize with return
+            }
+
+            val entries: ArrayList<Entry> = ArrayList()
+            for(i in start..end step DAY_IN_MILIS)
+                entries.add(Entry(i.toFloat(), calculateSumOfDay(i)))
+
+
+            report_count_and_time_base_line_chart.data = LineData(LineDataSet(entries, ""))
+            report_count_and_time_base_line_chart.invalidate() // refresh
         }
 
         fun loadChart2(){
