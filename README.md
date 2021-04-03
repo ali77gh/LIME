@@ -6,13 +6,16 @@ application concept: [google docs](https://docs.google.com/document/d/17KNgtW530
 
 # SOME Screenshot
 
-<img src="./screen_shots/home.jpg" width=200>
-<img src="./screen_shots/task.jpg" width=200>
-<img src="./screen_shots/routine.jpg" width=200>
-<br>
-<img src="./screen_shots/events.jpg" width=200>
-<img src="./screen_shots/report1.jpg" width=200>
-<img src="./screen_shots/report2.jpg" width=200>
+<p float="left">
+  <img src="./screen_shots/home.jpg" width=200>
+  <img src="./screen_shots/task.jpg" width=200>
+  <img src="./screen_shots/routine.jpg" width=200>
+</p>
+<p float="left">
+  <img src="./screen_shots/events.jpg" width=200>
+  <img src="./screen_shots/report1.jpg" width=200>
+  <img src="./screen_shots/report2.jpg" width=200>
+</p>
 
 # TODO
 you can help me in:
